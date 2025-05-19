@@ -3,6 +3,8 @@ import torch
 import numpy as np
 import os
 
+from midas.model_loader import load_model as load_model_midas
+
 PREDICTION_FORMAT_GRAYSCALE = "grayscale"
 PREDICTION_FORMAT_GRAYSCALE_DEPTH = "grayscale-depth"
 PREDICTION_FORMAT_NUMPY = "numpy"
@@ -66,7 +68,7 @@ def load_model(device: str, model_path: str, model_type: str, optimize: bool, he
         torch.backends.cudnn.enabled = True
         torch.backends.cudnn.benchmark = True
     result.device = torch.device(device)
-    result.model, result.transform, result.net_w, result.net_h = load_model(
+    result.model, result.transform, result.net_w, result.net_h = load_model_midas(
         result.device, result.model_path, result.model_type, result.optimize, result.height, result.square)
     return result
 
