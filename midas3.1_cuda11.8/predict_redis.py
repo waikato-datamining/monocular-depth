@@ -14,7 +14,8 @@ def process_image(msg_cont):
     :param msg_cont: the message container to process
     :type msg_cont: MessageContainer
     """
-    model_cont = msg_cont.params.model_cont
+    config = msg_cont.params.config
+    model_cont = config.model_cont
 
     try:
         start_time = datetime.now()
@@ -24,7 +25,7 @@ def process_image(msg_cont):
         image = model_cont.transform({"image": original_image_rgb})["image"]
         with torch.no_grad():
             pred = predict(model_cont, image, original_image_rgb.shape[1::-1])
-        out_data = prediction_to_data(pred, msg_cont.params.prediction_format)
+        out_data = prediction_to_data(pred, config.prediction_format)
         msg_cont.params.redis.publish(msg_cont.params.channel_out, out_data)
 
         if config.verbose:
