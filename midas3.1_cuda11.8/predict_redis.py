@@ -43,8 +43,8 @@ def process_image(msg_cont):
 if __name__ == '__main__':
     parser = create_parser('MiDaS - Prediction (Redis)', prog="midas_predict_redis", prefix="redis_")
     parser.add_argument('--device', help='The device to use (auto|cpu|cuda)', required=False, default="auto")
-    parser.add_argument('--model_path', help='Path to the weights', required=False, default=None)
-    parser.add_argument('--model_type', help='The type of model to use: ' + MODEL_TYPES, required=False, default=None)
+    parser.add_argument('--model_weights', help='Path to the weights', required=True, default=None)
+    parser.add_argument('--model_type', help='The type of model to use: ' + MODEL_TYPES, required=True, default=None)
     parser.add_argument('--optimize', action='store_true', help='Whether to optimize using half-float precision', required=False, default=False)
     parser.add_argument('--height', type=int, help='Preferred height of images feed into the encoder during inference. Note that the preferred height may differ from the actual height, because an alignment to multiples of 32 takes place. Many models support only the height chosen during training, which is used automatically if this parameter is not set.', required=False, default=None)
     parser.add_argument('--square', action='store_true', help='Option to resize images to a square resolution by changing their widths when images are fed into the encoder during inference. If this parameter is not set, the aspect ratio of images is tried to be preserved if supported by the model.', required=False, default=False)
