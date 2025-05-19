@@ -1,5 +1,6 @@
 from datetime import datetime
 import numpy as np
+import torch
 import traceback
 
 from rdh import Container, MessageContainer, create_parser, configure_redis, run_harness, log
@@ -21,7 +22,8 @@ def process_image(msg_cont):
         array = np.frombuffer(msg_cont.message['data'], np.uint8)
         original_image_rgb = load_image_array(array)
         image = cont.transform({"image": original_image_rgb})["image"]
-        pred = predict(model_cont, image, original_image_rgb.shape[1::-1])
+        with torch.no_grad():
+            pred = predict(model_cont, image, original_image_rgb.shape[1::-1])
         out_data = prediction_to_data(pred, msg_cont.params.prediction_format)
         msg_cont.params.redis.publish(msg_cont.params.channel_out, out_data)
 

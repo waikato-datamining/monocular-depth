@@ -1,6 +1,7 @@
 import os
 import argparse
 from image_complete import auto
+import torch
 import traceback
 
 from sfp import Poller
@@ -46,7 +47,8 @@ def process_image(fname, output_dir, poller):
         cont = poller.params.model_cont
         original_image_rgb = load_image_file(fname)
         image = cont.transform({"image": original_image_rgb})["image"]
-        pred = predict(poller.params.model_cont, image, original_image_rgb.shape[1::-1])
+        with torch.no_grad():
+            pred = predict(poller.params.model_cont, image, original_image_rgb.shape[1::-1])
         fname_out = os.path.join(output_dir, os.path.splitext(os.path.basename(fname))[0] + ".png")
         fname_out = prediction_to_file(pred, poller.params.prediction_format, fname_out)
         result.append(fname_out)
