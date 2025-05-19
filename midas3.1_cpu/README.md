@@ -141,6 +141,8 @@ The following additional scripts are available:
 
 ## Models
 
+Download the appropriate model to use with the `--model_weights` option.
+
 MiDaS 3.1
 - For highest quality: [dpt_beit_large_512](https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_beit_large_512.pt)
 - For moderately less quality, but better speed-performance trade-off: [dpt_swin2_large_384](https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_swin2_large_384.pt)
