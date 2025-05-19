@@ -19,7 +19,8 @@ RUN pip install --no-cache-dir \
         "redis-docker-harness==0.0.4" \
         opencv-python \
         openvino \
-        timm
+        timm \
+        pip install git+https://github.com/isl-org/MiDaS.git@v3_1
 
 WORKDIR /opt
 
