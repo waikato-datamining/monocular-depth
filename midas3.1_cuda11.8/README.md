@@ -136,5 +136,6 @@ to download them constantly, you can the cache directory to the host machine:
 
 The following additional scripts are available:
 
+* `midas_run` - for generating predictions of supplied files (calls the `/opt/midas/run.py` script)
 * `midas_predict_poll` - for generating predictions of supplied files in batch/poll mode (calls the `/opt/midas/predict_poll.py` script)
 * `midas_predict_redis` - for generating predictions via Redis (calls the `/opt/midas/predict_redis.py` script)
