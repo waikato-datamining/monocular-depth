@@ -143,7 +143,7 @@ The following additional scripts are available:
 
 ## Models
 
-Download the appropriate model to use with the `--model_weights` option.
+Download the appropriate model to use with the `--model_weights` option, e.g., using `wget <URL>`.
 
 MiDaS 3.1
 - For highest quality: [dpt_beit_large_512](https://github.com/isl-org/MiDaS/releases/download/v3_1/dpt_beit_large_512.pt)
