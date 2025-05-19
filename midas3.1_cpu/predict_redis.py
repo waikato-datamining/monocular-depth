@@ -4,7 +4,7 @@ import torch
 import traceback
 
 from rdh import Container, MessageContainer, create_parser, configure_redis, run_harness, log
-from predict_common import prediction_to_data, PREDICTION_FORMATS, PREDICTION_FORMAT_GRAYSCALE, load_model, load_image_array, MODEL_TYPES, ModelContainer, predict
+from predict_common import prediction_to_data, PREDICTION_FORMATS_DATA, PREDICTION_FORMAT_GRAYSCALE, load_model, load_image_array, MODEL_TYPES, ModelContainer, predict
 
 
 def process_image(msg_cont):
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     parser.add_argument('--optimize', action='store_true', help='Whether to optimize using half-float precision', required=False, default=False)
     parser.add_argument('--height', type=int, help='Preferred height of images feed into the encoder during inference. Note that the preferred height may differ from the actual height, because an alignment to multiples of 32 takes place. Many models support only the height chosen during training, which is used automatically if this parameter is not set.', required=False, default=None)
     parser.add_argument('--square', action='store_true', help='Option to resize images to a square resolution by changing their widths when images are fed into the encoder during inference. If this parameter is not set, the aspect ratio of images is tried to be preserved if supported by the model.', required=False, default=False)
-    parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS, help='The format for the prediction images')
+    parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS_DATA, help='The format for the prediction images')
     parser.add_argument('--verbose', action='store_true', help='Whether to output more logging info', required=False, default=False)
     parsed = parser.parse_args()
 

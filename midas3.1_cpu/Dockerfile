@@ -20,6 +20,7 @@ RUN pip install --no-cache-dir \
         opencv-python \
         openvino \
         imutils \
+        pypfm \
         timm==0.6.13
 
 WORKDIR /opt

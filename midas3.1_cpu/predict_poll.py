@@ -5,7 +5,7 @@ import torch
 import traceback
 
 from sfp import Poller
-from predict_common import prediction_to_file, PREDICTION_FORMATS, PREDICTION_FORMAT_GRAYSCALE, load_model, load_image_file, MODEL_TYPES, ModelContainer, predict
+from predict_common import prediction_to_file, PREDICTION_FORMATS_FILE, PREDICTION_FORMAT_GRAYSCALE, load_model, load_image_file, MODEL_TYPES, ModelContainer, predict
 
 
 SUPPORTED_EXTS = [".jpg", ".jpeg"]
@@ -120,7 +120,7 @@ if __name__ == '__main__':
     parser.add_argument('--prediction_in', help='Path to the test images', required=True, default=None)
     parser.add_argument('--prediction_out', help='Path to the output csv files folder', required=True, default=None)
     parser.add_argument('--prediction_tmp', help='Path to the temporary csv files folder', required=False, default=None)
-    parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS, help='The format for the prediction images')
+    parser.add_argument('--prediction_format', default=PREDICTION_FORMAT_GRAYSCALE, choices=PREDICTION_FORMATS_FILE, help='The format for the prediction images')
     parser.add_argument('--poll_wait', type=float, help='poll interval in seconds when not using watchdog mode', required=False, default=1.0)
     parser.add_argument('--continuous', action='store_true', help='Whether to continuously load test images and perform prediction', required=False, default=False)
     parser.add_argument('--use_watchdog', action='store_true', help='Whether to react to file creation events rather than performing fixed-interval polling', required=False, default=False)

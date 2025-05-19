@@ -4,11 +4,19 @@ import numpy as np
 import os
 
 from midas.model_loader import load_model as load_model_midas
+from pypfm import PFMLoader
 
 PREDICTION_FORMAT_GRAYSCALE = "grayscale"
 PREDICTION_FORMAT_GRAYSCALE_DEPTH = "grayscale-depth"
 PREDICTION_FORMAT_NUMPY = "numpy"
-PREDICTION_FORMATS = [
+PREDICTION_FORMAT_PFM = "pfm"
+PREDICTION_FORMATS_FILE = [
+    PREDICTION_FORMAT_GRAYSCALE,
+    PREDICTION_FORMAT_GRAYSCALE_DEPTH,
+    PREDICTION_FORMAT_NUMPY,
+    PREDICTION_FORMAT_PFM,
+]
+PREDICTION_FORMATS_DATA = [
     PREDICTION_FORMAT_GRAYSCALE,
     PREDICTION_FORMAT_GRAYSCALE_DEPTH,
     PREDICTION_FORMAT_NUMPY,
@@ -168,7 +176,7 @@ def prediction_to_file(depth, prediction_format: str, path: str) -> str:
     :return: the filename the predictions were saved under
     :rtype: str
     """
-    if prediction_format not in PREDICTION_FORMATS:
+    if prediction_format not in PREDICTION_FORMATS_FILE:
         raise Exception("Unsupported format: %s" % prediction_format)
 
     if prediction_format == PREDICTION_FORMAT_GRAYSCALE:
@@ -193,6 +201,10 @@ def prediction_to_file(depth, prediction_format: str, path: str) -> str:
             cv2.imwrite(path + ".png", out.astype("uint16"))
         else:
             raise Exception("Unsupported format: %s" % prediction_format)
+    elif prediction_format == PREDICTION_FORMAT_PFM:
+        path = os.path.splitext(path)[0] + ".pfm"
+        loader = PFMLoader(color=False, compress=False)
+        loader.save_pfm(path, depth)
     else:
         path = os.path.splitext(path)[0] + ".npy"
         np.save(path, depth)
@@ -210,7 +222,7 @@ def prediction_to_data(depth, prediction_format: str) -> bytes:
     :return: the generated data
     :rtype: bytes
     """
-    if prediction_format not in PREDICTION_FORMATS:
+    if prediction_format not in PREDICTION_FORMATS_DATA:
         raise Exception("Unsupported format: %s" % prediction_format)
 
     if prediction_format == PREDICTION_FORMAT_GRAYSCALE:
