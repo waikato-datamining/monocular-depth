@@ -16,7 +16,10 @@ RUN pip install --no-cache-dir \
         redis \
         "fast-opex==0.0.4" \
         orjson \
-        "redis-docker-harness==0.0.4"
+        "redis-docker-harness==0.0.4" \
+        opencv-python \
+        openvino \
+        timm
 
 WORKDIR /opt
 
