@@ -14,14 +14,14 @@ def process_image(msg_cont):
     :param msg_cont: the message container to process
     :type msg_cont: MessageContainer
     """
-    cont = msg_cont.params.model_cont
+    model_cont = msg_cont.params.model_cont
 
     try:
         start_time = datetime.now()
 
         array = np.frombuffer(msg_cont.message['data'], np.uint8)
         original_image_rgb = load_image_array(array)
-        image = cont.transform({"image": original_image_rgb})["image"]
+        image = model_cont.transform({"image": original_image_rgb})["image"]
         with torch.no_grad():
             pred = predict(model_cont, image, original_image_rgb.shape[1::-1])
         out_data = prediction_to_data(pred, msg_cont.params.prediction_format)
