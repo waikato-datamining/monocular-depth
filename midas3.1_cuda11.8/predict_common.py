@@ -33,7 +33,7 @@ MODEL_TYPES = \
 class ModelContainer:
     first_execution: bool = False
     device = None
-    model_path: str = None
+    model_weights: str = None
     model_type: str = None
     optimize: bool = False
     height: int = None
@@ -45,14 +45,14 @@ class ModelContainer:
 
 
 
-def load_model(device: str, model_path: str, model_type: str, optimize: bool, height: int, square: bool) -> ModelContainer:
+def load_model(device: str, model_weights: str, model_type: str, optimize: bool, height: int, square: bool) -> ModelContainer:
     """
     Loads the model.
 
     :param device: the device to run the model on (auto|cpu|cuda)
     :type device: str
-    :param model_path: the path to the weights, can be None
-    :type model_path: str
+    :param model_weights: the path to the weights, can be None
+    :type model_weights: str
     :param model_type: the type of model to use
     :type model_type: str
     :param optimize: whether to use half-float optimization or not
@@ -65,7 +65,7 @@ def load_model(device: str, model_path: str, model_type: str, optimize: bool, he
     :rtype: ModelContainer
     """
     result = ModelContainer()
-    result.model_path = model_path
+    result.model_weights = model_weights
     result.model_type = model_type
     result.optimize = optimize
     result.height = height
@@ -77,7 +77,7 @@ def load_model(device: str, model_path: str, model_type: str, optimize: bool, he
         torch.backends.cudnn.benchmark = True
     result.device = torch.device(device)
     result.model, result.transform, result.net_w, result.net_h = load_model_midas(
-        result.device, result.model_path, result.model_type, result.optimize, result.height, result.square)
+        result.device, result.model_weights, result.model_type, result.optimize, result.height, result.square)
     return result
 
 

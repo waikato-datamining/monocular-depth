@@ -132,7 +132,7 @@ if __name__ == '__main__':
     parsed = parser.parse_args()
 
     try:
-        model_cont = load_model(parsed.device, parsed.model_path, parsed.model_type, parsed.optimize, parsed.height, parsed.square)
+        model_cont = load_model(parsed.device, parsed.model_weights, parsed.model_type, parsed.optimize, parsed.height, parsed.square)
 
         # Performing the prediction and producing the predictions files
         predict_on_images(model_cont, parsed.prediction_in, parsed.prediction_out, parsed.prediction_tmp,
