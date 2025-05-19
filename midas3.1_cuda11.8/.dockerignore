@@ -1,0 +1,7 @@
+test/
+cache/
+data/
+predictions/
+output/
+*.zip
+
