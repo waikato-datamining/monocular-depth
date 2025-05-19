@@ -179,3 +179,8 @@ cython_debug/
 *.bak
 test/
 blah*
+cache/
+models/
+prediction/
+predictions/
+

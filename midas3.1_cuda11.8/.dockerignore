@@ -1,6 +1,8 @@
 test/
 cache/
 data/
+models/
+prediction/
 predictions/
 output/
 *.zip
