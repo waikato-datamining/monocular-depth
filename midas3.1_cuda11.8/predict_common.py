@@ -3,6 +3,7 @@ import torch
 import numpy as np
 import os
 
+from io import BytesIO
 from midas.model_loader import load_model as load_model_midas
 from pypfm import PFMLoader
 
@@ -248,6 +249,8 @@ def prediction_to_data(depth, prediction_format: str) -> bytes:
         else:
             raise Exception("Unsupported format: %s" % prediction_format)
     else:
-        result = np.array(depth).tobytes()
+        with BytesIO() as b:
+            np.save(b, depth, allow_pickle=False)
+            result = b.getvalue()
 
     return result
