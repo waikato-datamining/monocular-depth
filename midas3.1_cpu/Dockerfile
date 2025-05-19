@@ -25,7 +25,7 @@ WORKDIR /opt
 
 RUN git clone https://github.com/isl-org/MiDaS.git midas && \
     cd midas && \
-    git reset --hard 1645b7e1675301fdfac03640738fe5a6531e17d6 && \
+    git reset --hard 1645b7e1675301fdfac03640738fe5a6531e17d6
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 COPY bash.bashrc /etc/bash.bashrc
