@@ -248,6 +248,6 @@ def prediction_to_data(depth, prediction_format: str) -> bytes:
         else:
             raise Exception("Unsupported format: %s" % prediction_format)
     else:
-        result = depth.tobytes()
+        result = np.array(depth).tobytes()
 
     return result
